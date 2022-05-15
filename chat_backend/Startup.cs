@@ -35,7 +35,7 @@ namespace chat_backend
            builder =>
            {
                builder.AllowAnyMethod().AllowAnyHeader()
-                      .WithOrigins("https://localhost:4201")
+                      .WithOrigins("http://localhost:4200")
                       .AllowCredentials();
            }));
 
