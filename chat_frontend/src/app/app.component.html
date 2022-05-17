@@ -1,0 +1,17 @@
+<div class="ud-header">
+  <h2 class="text-center">Chat</h2>
+</div>
+
+<div class="ud-body">
+  <div class="msg-box">
+  </div>
+
+  <div class="ud-flex-row">
+    <input type="text" placeholder="Type message here" class="msg-input" [(ngModel)]="msgDto.msgText"  />
+    <button class="send-btn" (click)= "send()"><i class="fa fa-paper-plane"></i></button>
+  </div>
+
+  <input type="text" placeholder="Your name" class="name-box" [(ngModel)]="msgDto.user" />
+</div>
+
+<router-outlet></router-outlet>
