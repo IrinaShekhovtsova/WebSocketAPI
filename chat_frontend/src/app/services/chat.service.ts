@@ -3,16 +3,17 @@ import * as signalR from '@microsoft/signalr';
 import { HttpClient } from '@angular/common/http';
 import { MessageDto } from '../Dto/MessageDto';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  private connection: any = new signalR.HubConnectionBuilder().withUrl("https://localhost:44379/chatsocket")
+  private connection: any = new signalR.HubConnectionBuilder().withUrl(environment.hubConnectionURL)
   .configureLogging(signalR.LogLevel.Information)
   .build();
-  readonly POST_URL = "https://localhost:44379/api/chat/send";
+  readonly POST_URL = environment.broadcastURL;
 
   private receivedMessageObject: MessageDto = new MessageDto();
   private sharedObj = new Subject<MessageDto>();
@@ -22,7 +23,8 @@ export class ChatService {
       await this.start();
   });
 
-  this.connection.on("ReceiveOne", (user: string, message: string) => { console.log('received');this.mapReceivedMessage(user, message);});
+  this.connection.on("ReceiveOne", (user: string, message: string) => { this.mapReceivedMessage(user, message);});
+  this.start();
   }
 
   public async start() {
@@ -38,7 +40,7 @@ export class ChatService {
 
 
   private mapReceivedMessage(user: string, message: string): void {
-    this.receivedMessageObject.msgText = user;
+    this.receivedMessageObject.user = user;
     this.receivedMessageObject.msgText = message;
 
     this.sharedObj.next(this.receivedMessageObject);

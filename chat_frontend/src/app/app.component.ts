@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   title = 'chat_frontend';
 
   msgDto: MessageDto = new MessageDto();
+  msgInboxArray: MessageDto[] = [];
 
   send(): void {
     if (this.msgDto) {
@@ -30,18 +31,10 @@ export class AppComponent implements OnInit {
   }
   addToInbox(obj: MessageDto) {
 
-    let ul = document.getElementsByTagName('ul')[0];
-    let li = document.createElement('li');
-    if(obj.user === this.msgDto.user) {
-      li.classList.add('in-msg');
-    } else {
-      li.classList.add('ex-msg');
-    }
-
-    let modifiedMessage = `${obj.user} : <br /><span class="msg-italic-style">${obj.msgText}</span>`;
-    li.textContent = modifiedMessage;
-
-    ul.appendChild(li);
+    let newObj = new MessageDto();
+    newObj.user = obj.user;
+    newObj.msgText = obj.msgText;
+    this.msgInboxArray.push(newObj);
 
   }
 }
