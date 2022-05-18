@@ -35,7 +35,7 @@ namespace chat_backend
            builder =>
            {
                builder.AllowAnyMethod().AllowAnyHeader()
-                      .WithOrigins("http://localhost:4200")
+                      .WithOrigins("http://localhost:53209")
                       .AllowCredentials();
            }));
 
@@ -61,7 +61,7 @@ namespace chat_backend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/chatsocket"); //  https://localhost:44379/chatsocket
+                endpoints.MapHub<ChatHub>("/chatsocket"); //  https://localhost:44373/chatsocket
             });
         }
     }

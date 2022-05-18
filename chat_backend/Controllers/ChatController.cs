@@ -21,7 +21,7 @@ namespace chat_backend.Controllers
             _hubContext = hubContext;
         }
 
-        [Route("send")]     // https://localhost:44379/api/chat/send
+        [Route("send")]     // https://localhost:44373/api/chat/send
         [HttpPost]
         public IActionResult SendRequest([FromBody] Message msg)
         {
